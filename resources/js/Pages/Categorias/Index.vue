@@ -102,8 +102,10 @@ const deleteCategoria = () => {
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                             {{ categoria.nombre_categoria }}
-                                            <img :src="categoria.imagen" alt="Imagen de la categoría"
-                                                class="w-16 h-16 object-cover rounded-md" />
+                                            <div v-if="categoria.imagen" class="mt-2">
+                                                <img :src="categoria.imagen" alt="Imagen de la categoría"
+                                                    class="w-16 h-16 object-cover rounded-md" />
+                                            </div>
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
@@ -122,10 +124,10 @@ const deleteCategoria = () => {
                                             </Link>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <button @click="confirmDelete(categoria)"
-                                            class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">
-                                            Eliminar
-                                        </button>
+                                            <button @click="confirmDelete(categoria)"
+                                                class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">
+                                                Eliminar
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -33,7 +33,7 @@ const closeModal = () => {
 const deleteForm = useForm({});
 
 const deleteProducto = () => {
-    deleteForm.delete(route('productos.destroy', productoToDelete.value.id_producto), {
+    deleteForm.delete(route('productos.destroy', productoToDelete.value), {
         onSuccess: () => {
             showDeleteModal.value = false;
         },
@@ -142,19 +142,19 @@ const deleteProducto = () => {
                                             {{ producto.caracteristicas }}
                                         </td> -->
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <Link :href="route('productos.show', producto.id_producto)"
+                                            <Link :href="route('productos.show', producto.slug)"
                                                 class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
                                             Ver detalle
                                             </Link>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <Link :href="route('productos.edit', producto.id_producto)"
+                                            <Link :href="route('productos.edit', producto.slug)"
                                                 class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
                                             Editar
                                             </Link>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button @click="confirmDelete(producto)"
+                                            <button @click="confirmDelete(producto.slug)"
                                                 class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">
                                                 Eliminar
                                             </button>

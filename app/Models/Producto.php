@@ -21,6 +21,10 @@ class Producto extends Model
         'slug',
     ];
     protected $primaryKey = 'id_producto';
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
     protected static function boot()
     {
         parent::boot();
@@ -28,4 +32,8 @@ class Producto extends Model
             $producto->slug = Str::slug($producto->nombre);
         });
     }
+    public function categoria()
+{
+    return $this->belongsTo(Categoria::class, 'id_categoria');
+}
 }

@@ -40,7 +40,7 @@ class CategoriaController extends Controller
             // Guarda la imagen en 'storage/app/public/images'
             $rutaImagen = $request->file('imagen')->storeAs('images', $nombreArchivo, 'public');
             // Genera una URL accesible
-            $validated['imagen'] = Storage::url($rutaImagen);
+            $validated['imagen'] = Storage::disk('public')->url($rutaImagen);
         }
 
         Categoria::create($validated);
