@@ -43,6 +43,9 @@ Route::middleware([
     // Rutas de recursos para categorías
     Route::resource('categorias', CategoriaController::class);
 
+    Route::post('/productos/{producto:slug}/send-pdf', [ProductoController::class, 'sendPdf'])
+        ->name('productos.sendPdf');
+
     // Rutas de recursos para productos usando 'slug' en lugar de ID
     Route::resource('productos', ProductoController::class)
          ->scoped([

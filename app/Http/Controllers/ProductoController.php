@@ -7,6 +7,9 @@ use App\Models\Producto;
 use Inertia\Inertia;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\ProductDetailPdfMail;
+use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProductoController extends Controller
 {
@@ -102,4 +105,19 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')
             ->with('message', 'Producto eliminado exitosamente.');
     }
+    public function sendPdf(Request $request, Producto $producto)
+{
+    $data = $request->validate([
+        'email' => 'required|email',
+    ]);
+
+    // Generar PDF de la vista products.pdf (crea esta blade)
+    $pdf = Pdf::loadView('products.pdf', compact('producto'));
+
+    // Enviar correo
+    Mail::to($data['email'])
+        ->send(new ProductDetailPdfMail($producto, $pdf->output()));
+
+    return back()->with('message', 'PDF enviado correctamente.');
+}
 }
