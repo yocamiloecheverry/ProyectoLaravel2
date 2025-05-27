@@ -145,6 +145,8 @@ function sendPdf() {
               <p class="text-center text-sm text-gray-500 mb-2">
                 {{ producto.nombre_categoria }} / {{ producto.marca }}
               </p>
+              <p class="text-center text-sm text-gray-700 mb-4">{{ producto.precio }}                
+              </p>
               <a :href="route('productos.show', producto.slug)" target="_blank"
                 class="block text-center text-blue-600 hover:underline dark:text-indigo-400 font-medium">
                 Ver detalle

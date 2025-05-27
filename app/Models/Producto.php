@@ -19,6 +19,7 @@ class Producto extends Model
         'caracteristicas',
         'imagen', // Para almacenar la ruta de la imagen
         'slug',
+        'precio',
     ];
     protected $primaryKey = 'id_producto';
     public function getRouteKeyName(): string

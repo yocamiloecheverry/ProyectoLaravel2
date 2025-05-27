@@ -65,6 +65,10 @@ const props = defineProps({
                                     <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Imagen</p>
                                     <img :src="producto.imagen" alt="Imagen del producto" class="w-32 h-32 object-cover rounded-md"/>
                                 </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Precio</p>
+                                    <p class="mt-1 text-sm text-gray-900 dark:text-white">{{ producto.precio | currency }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -33,6 +33,7 @@ Route::middleware([
                 'imagen'           => $p->imagen,
                 'marca'            => $p->marca,
                 'nombre_categoria' => $p->categoria->nombre_categoria,
+                'precio'           => $p->precio,
             ]);
 
         return Inertia::render('Dashboard', [

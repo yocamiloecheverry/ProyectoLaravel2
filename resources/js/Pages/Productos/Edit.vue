@@ -21,6 +21,7 @@ const form = reactive({
   caracteristicas: props.producto.caracteristicas,
   id_categoria: props.producto.id_categoria,
   imagen: null, // inicia en null
+  precio: props.producto.precio,
   preview: props.producto.imagen_url || null, // vista previa inicial
   errors: {},
   processing: false,
@@ -34,6 +35,7 @@ const submit = () => {
   formData.append('capacidad', form.capacidad);
   formData.append('caracteristicas', form.caracteristicas);
   formData.append('id_categoria', form.id_categoria);
+  formData.append('precio', form.precio);
   if (form.imagen instanceof File) {
     formData.append('imagen', form.imagen);
   }
@@ -61,16 +63,15 @@ const handleFileUpload = (event) => {
 </script>
 
 <template>
+
   <Head title="Editar Producto" />
   <AppLayout>
     <template #header>
       <div class="flex justify-between items-center">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Editar Producto</h2>
-        <Link
-          :href="route('productos.index')"
-          class="px-4 py-2 bg-gray-800 dark:bg-gray-700 text-white rounded-md hover:bg-gray-700 dark:hover:bg-gray-600"
-        >
-          Volver a Productos
+        <Link :href="route('productos.index')"
+          class="px-4 py-2 bg-gray-800 dark:bg-gray-700 text-white rounded-md hover:bg-gray-700 dark:hover:bg-gray-600">
+        Volver a Productos
         </Link>
       </div>
     </template>
@@ -84,32 +85,16 @@ const handleFileUpload = (event) => {
               <!-- Nombre -->
               <div class="mb-4">
                 <InputLabel for="nombre" value="Nombre Producto" class="dark:text-gray-300" />
-                <TextInput
-                  id="nombre"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.nombre"
-                  required
-                  autofocus
-                />
+                <TextInput id="nombre" type="text" class="mt-1 block w-full" v-model="form.nombre" required autofocus />
                 <InputError class="mt-2" :message="form.errors.nombre" />
               </div>
 
               <!-- Categoría -->
               <div class="mb-4">
                 <InputLabel for="categoria" value="Categoría del Producto" class="dark:text-gray-300" />
-                <select
-                  id="id_categoria"
-                  class="mt-1 block w-full"
-                  v-model="form.id_categoria"
-                  required
-                >
+                <select id="id_categoria" class="mt-1 block w-full" v-model="form.id_categoria" required>
                   <option value="" disabled>Seleccione una categoría</option>
-                  <option
-                    v-for="categoria in categorias"
-                    :key="categoria.id_categoria"
-                    :value="categoria.id_categoria"
-                  >
+                  <option v-for="categoria in categorias" :key="categoria.id_categoria" :value="categoria.id_categoria">
                     {{ categoria.nombre_categoria }}
                   </option>
                 </select>
@@ -119,84 +104,57 @@ const handleFileUpload = (event) => {
               <!-- Marca -->
               <div class="mb-4">
                 <InputLabel for="marca" value="Marca Producto" class="dark:text-gray-300" />
-                <TextInput
-                  id="marca"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.marca"
-                  required
-                />
+                <TextInput id="marca" type="text" class="mt-1 block w-full" v-model="form.marca" required />
                 <InputError class="mt-2" :message="form.errors.marca" />
               </div>
 
               <!-- Referencia -->
               <div class="mb-4">
                 <InputLabel for="referencia" value="Referencia Producto" class="dark:text-gray-300" />
-                <TextInput
-                  id="referencia"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.referencia"
-                  required
-                />
+                <TextInput id="referencia" type="text" class="mt-1 block w-full" v-model="form.referencia" required />
                 <InputError class="mt-2" :message="form.errors.referencia" />
               </div>
 
               <!-- Capacidad -->
               <div class="mb-4">
                 <InputLabel for="capacidad" value="Capacidad Producto" class="dark:text-gray-300" />
-                <TextInput
-                  id="capacidad"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.capacidad"
-                  required
-                />
+                <TextInput id="capacidad" type="text" class="mt-1 block w-full" v-model="form.capacidad" required />
                 <InputError class="mt-2" :message="form.errors.capacidad" />
               </div>
 
               <!-- Características -->
               <div class="mb-4">
                 <InputLabel for="caracteristicas" value="Características Producto" class="dark:text-gray-300" />
-                <TextInput
-                  id="caracteristicas"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.caracteristicas"
-                  required
-                />
+                <TextInput id="caracteristicas" type="text" class="mt-1 block w-full" v-model="form.caracteristicas"
+                  required />
                 <InputError class="mt-2" :message="form.errors.caracteristicas" />
+              </div>
+              <!-- Precio -->
+              <div class="mb-4">
+                <InputLabel for="precio" value="Precio Producto" class="dark:text-gray-300" />
+                <TextInput id="precio" type="number" step="0.01" class="mt-1 block w-full" v-model="form.precio"
+                  required />
+                <InputError class="mt-2" :message="form.errors.precio" />
               </div>
 
               <!-- Imagen -->
               <div class="mb-4">
                 <InputLabel for="imagen" value="Imagen del Producto" class="dark:text-gray-300" />
-                <input
-                  id="imagen"
-                  type="file"
+                <input id="imagen" type="file"
                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
-                  @change="handleFileUpload"
-                />
+                  @change="handleFileUpload" />
                 <InputError class="mt-2" :message="form.errors.imagen" />
               </div>
 
               <!-- Vista previa de la imagen -->
               <div v-if="form.preview" class="mb-4">
                 <label class="dark:text-gray-300">Vista previa:</label>
-                <img
-                  :src="form.preview"
-                  alt="Vista previa"
-                  class="mt-2 max-w-xs rounded-md"
-                />
+                <img :src="form.preview" alt="Vista previa" class="mt-2 max-w-xs rounded-md" />
               </div>
 
               <!-- Botón -->
               <div class="flex items-center justify-end mt-4">
-                <PrimaryButton
-                  class="ml-4"
-                  :class="{ 'opacity-25': form.processing }"
-                  :disabled="form.processing"
-                >
+                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                   Editar Producto
                 </PrimaryButton>
               </div>

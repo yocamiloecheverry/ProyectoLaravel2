@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('caracteristicas')->nullable();
             $table->string('imagen')->nullable(); // Para almacenar la ruta de la imagen
             $table->string('slug')->unique();
+            $table->Integer('precio')->default(0);
             $table->timestamps();
         });
     }

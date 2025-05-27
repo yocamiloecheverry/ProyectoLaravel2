@@ -46,6 +46,7 @@ class ProductoController extends Controller
             'capacidad' => 'nullable|string|max:255',
             'caracteristicas' => 'nullable|string',
             'imagen' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'precio' => 'required|numeric|min:0',
         ]);
         // Verificar si el usuario ha subido una imagen
         if ($request->hasFile('imagen')) {
@@ -81,6 +82,7 @@ class ProductoController extends Controller
             'capacidad' => 'nullable|string|max:255',
             'caracteristicas' => 'nullable|string',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'precio' => 'required|numeric|min:0',
         ]);
 
         // Mantener la imagen anterior si el usuario no sube una nueva

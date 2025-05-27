@@ -26,6 +26,7 @@ class ProductController extends Controller
             'caracteristicas'=> 'nullable|string',
             'imagen'         => 'nullable|url',
             'slug'           => 'required|string|unique:productos,slug',
+            'precio'         => 'required|numeric|min:0',
         ]);
 
         $product = Producto::create($data);
@@ -53,6 +54,7 @@ class ProductController extends Controller
             'caracteristicas'=> 'nullable|string',
             'imagen'         => 'nullable|url',
             'slug'           => "required|string|unique:productos,slug,{$product->id_producto},id_producto",
+            'precio'         => 'required|numeric|min:0',
         ]);
 
         $product->update($data);

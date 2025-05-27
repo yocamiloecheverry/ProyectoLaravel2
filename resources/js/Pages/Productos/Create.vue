@@ -14,6 +14,7 @@ const form = useForm({
     capacidad: '',
     caracteristicas: '',
     imagen: null,
+    precio: '',
 });
 
 
@@ -107,6 +108,13 @@ const handleFileUpload = (event) => {
                                 <TextInput id="caracteristicas" type="text" class="mt-1 block w-full"
                                     v-model="form.caracteristicas" required />
                                 <InputError class="mt-2" :message="form.errors.caracteristicas" />
+                            </div>
+
+                            <div class="mb-4">
+                                <InputLabel for="precio" value="Precio Producto" class="dark:text-gray-300" />
+                                <TextInput id="precio" type="number" step="0.01" class="mt-1 block w-full"
+                                    v-model="form.precio" required />
+                                <InputError class="mt-2" :message="form.errors.precio" />
                             </div>
 
                             <div class="mb-4">
